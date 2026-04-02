@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>sophie / about</title>
+  <meta name="description" content="about sophie yang"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mypink: '#e879a0',
+            mygray: '#6b7280',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Courier New', Courier, monospace; }
+    body { background-color: #0d0d0d; color: #d4d4d4; }
+    a { color: inherit; }
+    a:hover { color: #e879a0; }
+    .custom-text-18 { font-size: 18px; }
+    ::selection { background: #e879a040; }
+  </style>
+</head>
+<body class="min-h-screen pl-0 pr-0 pt-12 pb-2 mx-10 flex justify-center sm:mx-24">
+  <div class="max-w-2xl w-full">
+    <canvas class="fixed top-0 left-0 w-full h-screen" style="z-index:-1; pointer-events:none;"></canvas>
+    <div class="w-full">
+      <div class="min-h-screen">
+
+        <!-- Nav -->
+        <div class="flex flex-row justify-between">
+          <p class="custom-text-18 text-white">sophie yang</p>
+          <ul class="flex flex-col justify-end gap-1 text-right">
+            <li><a href="index.html">experience</a></li>
+            <li class="text-mypink"><a href="/about.html">about</a></li>
+            <li><a href="mailto:sophy@umich.edu">contact</a></li>
+          </ul>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="font-bold pt-10 pb-5 text-mypink">// ABOUT</div>
+
+        <p class="text-white leading-relaxed">hi! i'm sophie yang and i'm an electrical engineering student at the university of michigan. i love building embedded systems and working at the intersection of hardware and software.</p>
+        <br/>
+        <p class="text-mygray leading-relaxed">when i'm not building you can find me drawing or gaming. i drew all the figures and designs for heatseeker and study pet, and i have 18 endorsements for valorant on linkedin :&nbsp;)</p>
+
+        <!-- Social links -->
+        <ul class="pt-10 pb-6 flex flex-row gap-1 text-mygray">
+          <li><a href="https://github.com/glossysauce" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">github</a></li>
+          <li class="text-mygray px-1">/</li>
+          <li><a href="https://linkedin.com/in/sophie-yang05" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">linkedin</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class ShootingStar {
+      constructor(delayed) {
+        this.reset(delayed);
+      }
+      reset(delayed) {
+        if (Math.random() < 0.5) {
+          this.x = Math.random() * canvas.width;
+          this.y = 0;
+        } else {
+          this.x = 0;
+          this.y = Math.random() * canvas.height * 0.5;
+        }
+        this.len = Math.random() * 120 + 60;
+        this.speed = Math.random() * 0.6 + 0.2;
+        this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.3;
+        this.dx = Math.cos(this.angle) * this.speed;
+        this.dy = Math.sin(this.angle) * this.speed;
+        this.alpha = 0;
+        this.fadeIn = true;
+        this.maxAlpha = Math.random() * 0.5 + 0.3;
+        this.progress = delayed ? -(Math.random() * 200) : 0;
+      }
+      update() {
+        this.progress++;
+        if (this.progress < 0) return;
+        this.x += this.dx;
+        this.y += this.dy;
+        if (this.fadeIn) {
+          this.alpha = Math.min(this.alpha + 0.02, this.maxAlpha);
+          if (this.alpha >= this.maxAlpha) this.fadeIn = false;
+        } else {
+          this.alpha = Math.max(this.alpha - 0.008, 0);
+        }
+        if (this.alpha <= 0 && !this.fadeIn) this.reset(false);
+        if (this.x > canvas.width + 200 || this.y > canvas.height + 200) this.reset(false);
+      }
+      draw() {
+        if (this.progress < 0 || this.alpha <= 0) return;
+        const tailX = this.x - Math.cos(this.angle) * this.len;
+        const tailY = this.y - Math.sin(this.angle) * this.len;
+        const grad = ctx.createLinearGradient(tailX, tailY, this.x, this.y);
+        grad.addColorStop(0, `rgba(232, 121, 160, 0)`);
+        grad.addColorStop(1, `rgba(232, 121, 160, ${this.alpha})`);
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(this.x, this.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 200, 220, ${this.alpha * 1.5})`;
+        ctx.fill();
+      }
+    }
+
+    const stars = Array.from({ length: 12 }, () => new ShootingStar(true));
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => { s.update(); s.draw(); });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

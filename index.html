@@ -12,96 +12,96 @@
         extend: {
           colors: {
             mypink: '#e879a0',
-            mygray: '#9ca3af',
-          },
-          fontSize: {
-            '18': '18px',
+            mygray: '#a0a0a0',
           }
         }
       }
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-    body { font-family: 'Inter', sans-serif; }
+    * { font-family: 'Courier New', Courier, monospace; }
+    body { background-color: #0d0d0d; color: #d4d4d4; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: #e879a0; }
+    .link-underline { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
     .custom-text-18 { font-size: 18px; }
+    ::selection { background: #e879a040; }
   </style>
 </head>
-<body class="min-h-screen pl-0 pr-0 pt-12 pb-2 mx-10 flex justify-center sm:mx-24">
+<body class="min-h-screen pl-0 pr-0 pt-6 pb-2 mx-10 flex justify-center sm:mx-24">
   <div class="max-w-2xl w-full">
-    <canvas class="absolute top-0 left-0 w-full h-screen -z-10"></canvas>
-    <div class="w-full bg-white bg-opacity-50">
+    <canvas class="fixed top-0 left-0 w-full h-screen" style="z-index:-1; pointer-events:none;"></canvas>
+    <div class="w-full">
       <div class="min-h-screen">
+
+        <!-- Last login line -->
+        <p id="last-login" class="text-mygray text-sm pb-4"></p>
 
         <!-- Nav -->
         <div class="flex flex-row justify-between">
-          <p class="custom-text-18">sophie yang</p>
-          <ul class="flex flex-col justify-end gap-1">
-            <li class="relative text-right text-mypink"><a href="/">experience</a></li>
-            <li class="text-right text-black"><a href="mailto:sophy@umich.edu">contact</a></li>
-            <li class="flex flex-row items-center text-mygray hover:text-black">
-              <a href="https://linkedin.com/in/sophie-yang05" target="_blank" rel="noopener noreferrer" class="text-right">linkedin</a>
-            </li>
+          <p class="custom-text-18 text-white">sophieyang@umich ~ %</p>
+          <ul class="flex flex-col justify-end gap-1 text-right">
+            <li class="text-mypink"><a href="index.html">experience</a></li>
+            <li><a href="about.html">about</a></li>
+            <li><a href="mailto:sophy@umich.edu">contact</a></li>
           </ul>
         </div>
 
         <!-- WORK -->
-        <div class="font-bold pt-10 pb-5 text-mypink">WORK</div>
+        <div class="font-bold pt-10 pb-5 text-mypink">// WORK</div>
 
-        <p>incoming electrical engineering intern at <a href="https://www.honeywell.com/us/en/industries/aerospace" class="underline" target="_blank" rel="noopener noreferrer">Honeywell Aerospace</a></p>
-        <p class="text-mygray">summer 2026</p>
+        <p class="text-white"><span class="text-mypink">&#62;</span> incoming electrical engineering intern at <a href="https://www.honeywell.com/us/en/industries/aerospace" class="link-underline" target="_blank" rel="noopener noreferrer">Honeywell Aerospace</a></p>
+        <p class="text-mygray pl-4">summer 2026</p>
         <br/>
 
-        <p>embedded sensing firmware researcher at <a href="https://theisclab.com/index.html" class="underline" target="_blank" rel="noopener noreferrer">Interactive Sensing &amp; Computing Lab</a></p>
-        <p class="text-mygray">jan 2026 - present · esp32, i²c, wifi streaming, wearable pcb</p>
+        <p class="text-white"><span class="text-mypink">&#62;</span> embedded sensing firmware researcher at <a href="https://theisclab.com/index.html" class="link-underline" target="_blank" rel="noopener noreferrer">Interactive Sensing &amp; Computing Lab</a></p>
+        <p class="text-mygray pl-4">jan 2026 - present · esp32, i²c, freeRTOS, wearable pcb</p>
         <br/>
 
-        <p>embedded hci researcher at <a href="sixlab-eecs.com" class="underline" target="_blank" rel="noopener noreferrer">Sensing Intelligence and eXperience Lab</a></p>
-        <p class="text-mygray">jan 2026 - present · pcb design, precision adc, biosignal acquisition</p>
+        <p class="text-white"><span class="text-mypink">&#62;</span> embedded hci researcher at <a href="https://sixlab-eecs.com" class="link-underline" target="_blank" rel="noopener noreferrer">Sensing Intelligence and eXperience Lab</a></p>
+        <p class="text-mygray pl-4">jan 2026 - present · pcb design, precision adc, biosignal acquisition, cognitive state tracking</p>
         <br/>
 
-        <p>power electronics and embedded circuits researcher at <a href="https://birds.eecs.umich.edu/" class="underline" target="_blank" rel="noopener noreferrer">BIRDS Lab</a></p>
-        <p class="text-mygray">jan 2025 - dec 2025 · esp32, adc oversampling, power board design, kicad</p>
+        <p class="text-white"><span class="text-mypink">&#62;</span> power electronics and embedded circuits researcher at <a href="https://www.birds.eecs.umich.edu/" class="link-underline" target="_blank" rel="noopener noreferrer">BIRDS Lab</a></p>
+        <p class="text-mygray pl-4">jan 2025 - dec 2025 · esp32, embedded hardware, power board design, kicad</p>
 
         <!-- PROJECTS -->
-        <div class="font-bold pt-10 pb-5 text-mypink">PROJECTS</div>
+        <div class="font-bold pt-10 pb-5 text-mypink">// PROJECTS</div>
 
         <div class="flex justify-between items-center">
-          <p>HEATSeeker</p>
-          <div class="flex">
-            <a href="https://github.com/rueyday/HEATSeeker" class="hover:underline" target="_blank" rel="noopener noreferrer">github</a>
-          </div>
+          <p class="text-white"><span class="text-mypink">&#62;</span> HEATSeeker</p>
+          <a href="https://github.com/rueyday/HEATSeeker" class="text-mygray hover:text-mypink" target="_blank" rel="noopener noreferrer">github</a>
         </div>
-        <p class="text-mygray">stm32, c, xbee, infrared sensing, smart glasses hud</p>
+        <p class="text-mygray pl-4">stm32, c, xbee, infrared sensing, motor control, smart glasses hud</p>
 
-        <div class="flex justify-between items-center">
-          <p class="pt-5">study pet</p>
-          <div class="flex">
-            <a href="https://github.com/glossysauce/study-pet" class="hover:underline" target="_blank" rel="noopener noreferrer">github</a>
-          </div>
+        <div class="flex justify-between items-center pt-5">
+          <p class="text-white"><span class="text-mypink">&#62;</span> study pet</p>
+          <a href="https://github.com/glossysauce/study-pet" class="text-mygray hover:text-mypink" target="_blank" rel="noopener noreferrer">github</a>
         </div>
-        <p class="text-mygray">stm32, c, python, spi lcd, buzzer, focus tracking</p>
+        <p class="text-mygray pl-4">stm32, c, python, spi lcd, hardware integration, focus tracking</p>
 
-        <div class="flex justify-between items-center">
-          <p class="pt-5">embedded audio processing system</p>
-          <div class="flex">
-            <a href="https://github.com/glossysauce/Audio-Processing-Embedded-System" class="hover:underline" target="_blank" rel="noopener noreferrer">github</a>
-          </div>
+        <div class="flex justify-between items-center pt-5">
+          <p class="text-white"><span class="text-mypink">&#62;</span> embedded audio processing system</p>
+          <a href="https://github.com/glossysauce/Audio-Processing-Embedded-System" class="text-mygray hover:text-mypink" target="_blank" rel="noopener noreferrer">github</a>
         </div>
-        <p class="text-mygray">stm32, c, python, pwm, fft/stft, digital filtering</p>
+        <p class="text-mygray pl-4">stm32, c, python, pwm, hardware integration, fft/stft, digital filtering</p>
 
-        <!-- Social links -->
-        <ul class="pt-10 flex flex-row">
-          <a href="https://github.com/glossysauce" class="pr-5" target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="text-black hover:text-mygray transition-colors">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
-          </a>
-          <a href="https://linkedin.com/in/sophie-yang05" class="pr-5" target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="text-black hover:text-mygray transition-colors">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </a>
+        <!-- Social icons -->
+        <ul class="pt-10 pb-6 flex flex-row items-center gap-4">
+          <li>
+            <a href="https://github.com/glossysauce" target="_blank" rel="noopener noreferrer" class="block text-mygray hover:text-mypink transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com/in/sophie-yang05" target="_blank" rel="noopener noreferrer" class="block text-mygray hover:text-mypink transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </li>
         </ul>
 
       </div>
@@ -109,7 +109,18 @@
   </div>
 
   <script>
-    // Canvas particle animation matching Laura's portfolio style
+    // Last login timestamp
+    const el = document.getElementById('last-login');
+    const now = new Date();
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const pad = n => String(n).padStart(2, '0');
+    const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 || 12;
+    el.textContent = `Last login: ${days[now.getDay()]} ${months[now.getMonth()]} ${now.getDate()} ${pad(h12)}:${pad(m)}:${pad(s)} ${ampm} on ttys000`;
+
+    // Canvas shooting stars
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
 
@@ -120,30 +131,67 @@
     resize();
     window.addEventListener('resize', resize);
 
-    const particles = Array.from({ length: 60 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      r: Math.random() * 2 + 0.5,
-      dx: (Math.random() - 0.5) * 0.3,
-      dy: (Math.random() - 0.5) * 0.3,
-      alpha: Math.random() * 0.4 + 0.1,
-    }));
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
+    class ShootingStar {
+      constructor(delayed) { this.reset(delayed); }
+      reset(delayed) {
+        if (Math.random() < 0.5) {
+          this.x = Math.random() * canvas.width;
+          this.y = 0;
+        } else {
+          this.x = 0;
+          this.y = Math.random() * canvas.height * 0.5;
+        }
+        this.len = Math.random() * 120 + 60;
+        this.speed = Math.random() * 0.6 + 0.2;
+        this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.3;
+        this.dx = Math.cos(this.angle) * this.speed;
+        this.dy = Math.sin(this.angle) * this.speed;
+        this.alpha = 0;
+        this.fadeIn = true;
+        this.maxAlpha = Math.random() * 0.5 + 0.3;
+        this.progress = delayed ? -(Math.random() * 200) : 0;
+      }
+      update() {
+        this.progress++;
+        if (this.progress < 0) return;
+        this.x += this.dx;
+        this.y += this.dy;
+        if (this.fadeIn) {
+          this.alpha = Math.min(this.alpha + 0.02, this.maxAlpha);
+          if (this.alpha >= this.maxAlpha) this.fadeIn = false;
+        } else {
+          this.alpha = Math.max(this.alpha - 0.008, 0);
+        }
+        if (this.alpha <= 0 && !this.fadeIn) this.reset(false);
+        if (this.x > canvas.width + 200 || this.y > canvas.height + 200) this.reset(false);
+      }
+      draw() {
+        if (this.progress < 0 || this.alpha <= 0) return;
+        const tailX = this.x - Math.cos(this.angle) * this.len;
+        const tailY = this.y - Math.sin(this.angle) * this.len;
+        const grad = ctx.createLinearGradient(tailX, tailY, this.x, this.y);
+        grad.addColorStop(0, `rgba(232, 121, 160, 0)`);
+        grad.addColorStop(1, `rgba(232, 121, 160, ${this.alpha})`);
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(232, 121, 160, ${p.alpha})`;
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(this.x, this.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 200, 220, ${this.alpha * 1.5})`;
         ctx.fill();
-        p.x += p.dx;
-        p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-      });
-      requestAnimationFrame(draw);
+      }
     }
-    draw();
+
+    const stars = Array.from({ length: 12 }, () => new ShootingStar(true));
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => { s.update(); s.draw(); });
+      requestAnimationFrame(animate);
+    }
+    animate();
   </script>
 </body>
 </html>
