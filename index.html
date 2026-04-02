@@ -8,24 +8,20 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            mypink: '#e879a0',
-            mygray: '#a0a0a0',
-          }
-        }
-      }
+      theme: { extend: { colors: { mypink: '#e879a0', mygray: '#a0a0a0' } } }
     }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { font-family: 'Courier New', Courier, monospace; }
-    body { background-color: #0d0d0d; color: #d4d4d4; }
+    * { font-family: 'Fira Code', monospace; }
+    body { background-color: #0d0d0d; color: #d4d4d4; line-height: 1.7; }
     a { color: inherit; text-decoration: none; }
     a:hover { color: #e879a0; }
-    .link-underline { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
     .custom-text-18 { font-size: 18px; }
     ::selection { background: #e879a040; }
+    .prompt { color: #e879a0; }
   </style>
 </head>
 <body class="min-h-screen pl-0 pr-0 pt-6 pb-2 mx-10 flex justify-center sm:mx-24">
@@ -34,7 +30,7 @@
     <div class="w-full">
       <div class="min-h-screen">
 
-        <!-- Last login line -->
+        <!-- Last login -->
         <p id="last-login" class="text-mygray text-sm pb-4"></p>
 
         <!-- Nav -->
@@ -47,44 +43,50 @@
           </ul>
         </div>
 
-        <!-- WORK -->
-        <div class="font-bold pt-10 pb-5 text-mypink">// WORK</div>
+        <!-- EXPERIENCE -->
+        <div class="pt-10 pb-5">
+          <p><span class="prompt">sophieyang@umich ~ %</span> ls experience</p>
+        </div>
 
-        <p class="text-white"><span class="text-mypink">&#62;</span> incoming electrical engineering intern at <a href="https://www.honeywell.com/us/en/industries/aerospace" class="link-underline" target="_blank" rel="noopener noreferrer">Honeywell Aerospace</a></p>
-        <p class="text-mygray pl-4">summer 2026</p>
+        <p class="font-bold"><a href="https://www.honeywell.com/us/en/industries/aerospace" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">honeywell_aerospace/</a></p>
+        <p>incoming electrical engineering intern</p>
+        <p class="text-mygray">summer 2026</p>
+
         <br/>
 
-        <p class="text-white"><span class="text-mypink">&#62;</span> embedded sensing firmware researcher at <a href="https://theisclab.com/index.html" class="link-underline" target="_blank" rel="noopener noreferrer">Interactive Sensing &amp; Computing Lab</a></p>
-        <p class="text-mygray pl-4">jan 2026 - present · esp32, i²c, freeRTOS, wearable pcb</p>
+        <p class="font-bold"><a href="https://theisclab.com/index.html" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">isc_lab/</a></p>
+        <p>embedded sensing firmware researcher</p>
+        <p class="text-mygray">jan 2026 – present · esp32 firmware, 48-node wearable sensing system, dual-core wireless streaming pipeline</p>
+
         <br/>
 
-        <p class="text-white"><span class="text-mypink">&#62;</span> embedded hci researcher at <a href="https://sixlab-eecs.com" class="link-underline" target="_blank" rel="noopener noreferrer">Sensing Intelligence and eXperience Lab</a></p>
-        <p class="text-mygray pl-4">jan 2026 - present · pcb design, precision adc, biosignal acquisition, cognitive state tracking</p>
+        <p class="font-bold"><a href="https://sixlab-eecs.com" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">six_lab/</a></p>
+        <p>embedded hci researcher</p>
+        <p class="text-mygray">jan 2026 – present · wearable pcb design, precision adc for biosignal acquisition, cognitive state tracking</p>
+
         <br/>
 
-        <p class="text-white"><span class="text-mypink">&#62;</span> power electronics and embedded circuits researcher at <a href="https://www.birds.eecs.umich.edu/" class="link-underline" target="_blank" rel="noopener noreferrer">BIRDS Lab</a></p>
-        <p class="text-mygray pl-4">jan 2025 - dec 2025 · esp32, embedded hardware, power board design, kicad</p>
+        <p class="font-bold"><a href="https://www.birds.eecs.umich.edu/" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">birds_lab/</a></p>
+        <p>embedded hardware & power electronics researcher</p>
+        <p class="text-mygray">jan 2025 – dec 2025 · esp32, embedded sensing hardware, power board design, kicad</p>
 
         <!-- PROJECTS -->
-        <div class="font-bold pt-10 pb-5 text-mypink">// PROJECTS</div>
-
-        <div class="flex justify-between items-center">
-          <p class="text-white"><span class="text-mypink">&#62;</span> HEATSeeker</p>
-          <a href="https://github.com/rueyday/HEATSeeker" class="text-mygray hover:text-mypink" target="_blank" rel="noopener noreferrer">github</a>
+        <div class="pt-10 pb-5">
+          <p><span class="prompt">sophieyang@umich ~ %</span> ls projects</p>
         </div>
-        <p class="text-mygray pl-4">stm32, c, xbee, infrared sensing, motor control, smart glasses hud</p>
 
-        <div class="flex justify-between items-center pt-5">
-          <p class="text-white"><span class="text-mypink">&#62;</span> study pet</p>
-          <a href="https://github.com/glossysauce/study-pet" class="text-mygray hover:text-mypink" target="_blank" rel="noopener noreferrer">github</a>
-        </div>
-        <p class="text-mygray pl-4">stm32, c, python, spi lcd, hardware integration, focus tracking</p>
+        <p class="font-bold"><a href="https://github.com/rueyday/HEATSeeker" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">heatseeker/</a></p>
+        <p class="text-mygray">stm32, c, xbee, infrared sensing, motor control, smart glasses hud</p>
 
-        <div class="flex justify-between items-center pt-5">
-          <p class="text-white"><span class="text-mypink">&#62;</span> embedded audio processing system</p>
-          <a href="https://github.com/glossysauce/Audio-Processing-Embedded-System" class="text-mygray hover:text-mypink" target="_blank" rel="noopener noreferrer">github</a>
-        </div>
-        <p class="text-mygray pl-4">stm32, c, python, pwm, hardware integration, fft/stft, digital filtering</p>
+        <br/>
+
+        <p class="font-bold"><a href="https://github.com/glossysauce/study-pet" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">study_pet/</a></p>
+        <p class="text-mygray">stm32, c, python, spi lcd, hardware integration, focus tracking</p>
+
+        <br/>
+
+        <p class="font-bold"><a href="https://github.com/glossysauce/Audio-Processing-Embedded-System" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">embedded_audio_processing_system/</a></p>
+        <p class="text-mygray">stm32, c, python, pwm, fft/stft, digital filtering</p>
 
         <!-- Social icons -->
         <ul class="pt-10 pb-6 flex flex-row items-center gap-4">
@@ -109,79 +111,58 @@
   </div>
 
   <script>
-    // Last login timestamp
     const el = document.getElementById('last-login');
     const now = new Date();
-    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const pad = n => String(n).padStart(2, '0');
-    const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
-    const ampm = h >= 12 ? 'PM' : 'AM';
+    const days = ['sun','mon','tue','wed','thu','fri','sat'];
+    const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+    const pad = n => String(n).padStart(2,'0');
+    const h = now.getHours(), min = now.getMinutes(), s = now.getSeconds();
+    const ampm = h >= 12 ? 'pm' : 'am';
     const h12 = h % 12 || 12;
-    el.textContent = `Last login: ${days[now.getDay()]} ${months[now.getMonth()]} ${now.getDate()} ${pad(h12)}:${pad(m)}:${pad(s)} ${ampm} on ttys000`;
+    el.textContent = `last login: ${days[now.getDay()]} ${months[now.getMonth()]} ${now.getDate()} ${pad(h12)}:${pad(min)}:${pad(s)} ${ampm} on ttys000`;
 
-    // Canvas shooting stars
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     resize();
     window.addEventListener('resize', resize);
 
     class ShootingStar {
       constructor(delayed) { this.reset(delayed); }
       reset(delayed) {
-        if (Math.random() < 0.5) {
-          this.x = Math.random() * canvas.width;
-          this.y = 0;
-        } else {
-          this.x = 0;
-          this.y = Math.random() * canvas.height * 0.5;
-        }
+        if (Math.random() < 0.5) { this.x = Math.random() * canvas.width; this.y = 0; }
+        else { this.x = 0; this.y = Math.random() * canvas.height * 0.5; }
         this.len = Math.random() * 120 + 60;
         this.speed = Math.random() * 0.6 + 0.2;
         this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.3;
         this.dx = Math.cos(this.angle) * this.speed;
         this.dy = Math.sin(this.angle) * this.speed;
-        this.alpha = 0;
-        this.fadeIn = true;
+        this.alpha = 0; this.fadeIn = true;
         this.maxAlpha = Math.random() * 0.5 + 0.3;
         this.progress = delayed ? -(Math.random() * 200) : 0;
       }
       update() {
         this.progress++;
         if (this.progress < 0) return;
-        this.x += this.dx;
-        this.y += this.dy;
+        this.x += this.dx; this.y += this.dy;
         if (this.fadeIn) {
           this.alpha = Math.min(this.alpha + 0.02, this.maxAlpha);
           if (this.alpha >= this.maxAlpha) this.fadeIn = false;
-        } else {
-          this.alpha = Math.max(this.alpha - 0.008, 0);
-        }
+        } else { this.alpha = Math.max(this.alpha - 0.008, 0); }
         if (this.alpha <= 0 && !this.fadeIn) this.reset(false);
         if (this.x > canvas.width + 200 || this.y > canvas.height + 200) this.reset(false);
       }
       draw() {
         if (this.progress < 0 || this.alpha <= 0) return;
-        const tailX = this.x - Math.cos(this.angle) * this.len;
-        const tailY = this.y - Math.sin(this.angle) * this.len;
-        const grad = ctx.createLinearGradient(tailX, tailY, this.x, this.y);
-        grad.addColorStop(0, `rgba(232, 121, 160, 0)`);
-        grad.addColorStop(1, `rgba(232, 121, 160, ${this.alpha})`);
-        ctx.beginPath();
-        ctx.moveTo(tailX, tailY);
-        ctx.lineTo(this.x, this.y);
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 200, 220, ${this.alpha * 1.5})`;
-        ctx.fill();
+        const tx = this.x - Math.cos(this.angle) * this.len;
+        const ty = this.y - Math.sin(this.angle) * this.len;
+        const g = ctx.createLinearGradient(tx, ty, this.x, this.y);
+        g.addColorStop(0, `rgba(232,121,160,0)`);
+        g.addColorStop(1, `rgba(232,121,160,${this.alpha})`);
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(this.x, this.y);
+        ctx.strokeStyle = g; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,200,220,${this.alpha * 1.5})`; ctx.fill();
       }
     }
 
