@@ -117,10 +117,8 @@
     const days = ['sun','mon','tue','wed','thu','fri','sat'];
     const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
     const pad = n => String(n).padStart(2,'0');
-    const h = now.getHours(), min = now.getMinutes(), s = now.getSeconds();
-    const ampm = h >= 12 ? 'pm' : 'am';
-    const h12 = h % 12 || 12;
-    el.textContent = `last login: ${days[now.getDay()]} ${months[now.getMonth()]} ${now.getDate()} ${pad(h12)}:${pad(min)}:${pad(s)} ${ampm} on ttys000`;
+    const h24 = now.getHours(), min = now.getMinutes(), s = now.getSeconds();
+    el.textContent = `last login: ${days[now.getDay()]} ${months[now.getMonth()]} ${now.getDate()} ${pad(h24)}:${pad(min)}:${pad(s)} on ttys000`;
 
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
