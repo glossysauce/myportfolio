@@ -76,7 +76,7 @@
           <p><span class="prompt">sophieyang@umich ~ %</span> ls projects</p>
         </div>
 
-        <p class="font-bold"><a href="https://github.com/rueyday/HEATSeeker" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">heatseeker/</a></p>
+        <p class="font-bold"><a href="https://rueyday.github.io/HEATSeeker/" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">heatseeker/</a></p>
         <p class="text-mygray">stm32, c, xbee, infrared sensing, motor control, smart glasses hud</p>
 
         <br/>
@@ -181,7 +181,7 @@
           if (this.alpha >= this.maxAlpha) this.fadeIn = false;
         } else { this.alpha = Math.max(this.alpha - 0.008, 0); }
         if (this.alpha <= 0 && !this.fadeIn) this.reset(false);
-        if (this.x > canvas.width + 200 || this.y > canvas.height + 200) this.reset(false);
+        if (this.x >canvas.width + 200 || this.y > canvas.height + 200) this.reset(false);
       }
       draw() {
         if (this.progress < 0 || this.alpha <= 0) return;
