@@ -22,6 +22,7 @@
     .custom-text-18 { font-size: 18px; }
     ::selection { background: #e879a040; }
     .prompt { color: #e879a0; }
+    .text-white { color: #ffffff; }
   </style>
 </head>
 <body class="min-h-screen pl-0 pr-0 pt-6 pb-2 mx-10 flex justify-center sm:mx-24">
@@ -127,6 +128,30 @@
     resize();
     window.addEventListener('resize', resize);
 
+    function drawStar(ctx, x, y, spikes, outerRadius, innerRadius, alpha, rotation) {
+      let rot = Math.PI / 2 * 3 + rotation;
+      let step = Math.PI / spikes;
+
+      ctx.beginPath();
+      ctx.moveTo(x, y - outerRadius);
+
+      for (let i = 0; i < spikes; i++) {
+        let x1 = x + Math.cos(rot) * outerRadius;
+        let y1 = y + Math.sin(rot) * outerRadius;
+        ctx.lineTo(x1, y1);
+        rot += step;
+
+        x1 = x + Math.cos(rot) * innerRadius;
+        y1 = y + Math.sin(rot) * innerRadius;
+        ctx.lineTo(x1, y1);
+        rot += step;
+      }
+
+      ctx.closePath();
+      ctx.fillStyle = `rgba(255,200,220,${alpha})`;
+      ctx.fill();
+    }
+
     class ShootingStar {
       constructor(delayed) { this.reset(delayed); }
       reset(delayed) {
@@ -139,12 +164,18 @@
         this.dy = Math.sin(this.angle) * this.speed;
         this.alpha = 0; this.fadeIn = true;
         this.maxAlpha = Math.random() * 0.5 + 0.3;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+        this.baseSize = Math.random() * 2 + 2;
+        this.sizeJitter = 0;
         this.progress = delayed ? -(Math.random() * 200) : 0;
       }
       update() {
         this.progress++;
         if (this.progress < 0) return;
         this.x += this.dx; this.y += this.dy;
+        this.rotation += this.rotationSpeed + (Math.random() - 0.5) * 0.01;
+        this.sizeJitter = (Math.random() - 0.5) * 0.5;
         if (this.fadeIn) {
           this.alpha = Math.min(this.alpha + 0.02, this.maxAlpha);
           if (this.alpha >= this.maxAlpha) this.fadeIn = false;
@@ -161,8 +192,11 @@
         g.addColorStop(1, `rgba(232,121,160,${this.alpha})`);
         ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(this.x, this.y);
         ctx.strokeStyle = g; ctx.lineWidth = 1.5; ctx.stroke();
-        ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,200,220,${this.alpha * 1.5})`; ctx.fill();
+        const size = this.baseSize + this.sizeJitter;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = `rgba(232,121,160,${this.alpha})`;
+        drawStar(ctx, this.x, this.y, 5, size, size * 0.5, this.alpha * 1.5, this.rotation);
+        ctx.shadowBlur = 0;
       }
     }
 
