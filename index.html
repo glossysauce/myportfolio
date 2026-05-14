@@ -17,7 +17,8 @@
   <style>
     * { font-family: 'Fira Code', monospace; }
     body { background-color: #0d0d0d; color: #d4d4d4; line-height: 1.7; }
-    a { color: inherit; text-decoration: underline; }
+    a { color: inherit; text-decoration: underline !important; text-underline-offset: 4px; text-decoration-color: rgba(212,212,212,0.35); }
+    a.no-underline { text-decoration: none !important; }
     a:hover { color: #e879a0; }
     .custom-text-18 { font-size: 18px; }
     ::selection { background: #e879a040; }
@@ -38,9 +39,9 @@
         <div class="flex flex-row justify-between">
           <p class="custom-text-18 text-white">sophieyang@umich ~ %</p>
           <ul class="flex flex-col justify-end gap-1 text-right">
-            <li class="text-mypink"><a href="index.html">experience</a></li>
-            <li><a href="about.html">about</a></li>
-            <li><a href="mailto:sophy@umich.edu">contact</a></li>
+            <li class="text-mypink"><a href="index.html" class="no-underline">experience</a></li>
+            <li><a href="about.html" class="no-underline">about</a></li>
+            <li><a href="mailto:sophy@umich.edu" class="no-underline">contact</a></li>
           </ul>
         </div>
 
