@@ -37,10 +37,12 @@
     .readme li::before { content: '-'; position: absolute; left: 0; color: #e879a0; }
     .readme .stack { color: #a0a0a0; font-size: 0.8rem; margin-top: 0.25rem; }
     .readme .funfact { color: #ffc8dc; font-size: 0.85rem; margin-top: 0.25rem; }
-
     .expand-btn { color: #a0a0a0; background: none; border: none; cursor: pointer; padding: 0; }
     .expand-btn:hover { color: #e879a0; }
     .expand-btn:focus-visible { outline: 1px dashed #e879a0; outline-offset: 4px; }
+    .coursework .course-list { margin-top: 0.75rem; padding-left: 1rem; border-left: 1px solid rgba(232,121,160,0.35); font-size: 0.9rem; }
+    .coursework .course-list li { margin-bottom: 0.2rem; }
+    .course-code { color: #e879a0; }
     @media (prefers-reduced-motion: reduce) { canvas { display: none; } }
   </style>
 </head>
@@ -70,7 +72,7 @@
 
         <div class="flex flex-row justify-between items-baseline pb-4">
           <p class="text-mygray text-sm">click any entry to expand ^_^</p>
-          <button id="expand-all" type="button" class="expand-btn text-sm">[expand all]</button>
+          <button id="expand-all" type="button" class="expand-btn text-sm"><span class="prompt">%</span> <span id="expand-cmd">cat */README</span></button>
         </div>
 
         <details class="entry">
@@ -83,8 +85,9 @@
             <p class="text-mygray"><span class="prompt">%</span> cat tesla/README</p>
             <ul>
               <li>debugged an issue where an existing test passed on a link that was transmitting frames but receiving none by isolating a failure to a change in how firmware reported link status after a firmware update broke an ethernet link check on a vehicle controller. rewrote the test to verify link quality instead of transmit counts and documented the findings for the firmware team.</li>
-              <li>built a python framework for 1200 hour high-temperature/high-humidity reliability testing of 6 controllers. each device runs in its own process so one hung connection can't stall the entire test. the script reads the chamber but only controls dut power, so a software bug can't change test conditions. test hours save to disk via JSON file so a crash never loses track of exposure time. logs are append-only and logs are rolled by test hours so data stays intact and easy to find.</li>
-              <li>redesigned and layed out a PCIe-to-DAQ thermal test board from two-wire to four-wire kelvin sensing in altium, so measurements read voltage at the device instead of including drops across cables and connectors. i traced ~640 signals and designed the pinout in a way that neighboring signals are adjacent across the connectors, and i interleaved force and sense lines so dense routing stayed clean.</li>
+              <li>debugged current-sense readings on a controller at board level. the high-side driver outputs need firmware running to switch on, so i enabled them over UDS diagnostics. the sense pin reports current proportional to load, so i simulated a load on the tester. </li>
+              <li>built a python framework for 1,200-hour high-temperature/high-humidity reliability testing of 6 controllers. each device runs in its own process so one hung connection can't stall the entire test. the script reads the chamber but only controls dut power, so a software bug can't change test conditions. test hours save to disk via JSON file so a crash never loses track of exposure time. logs are append-only and roll by test hours so data stays intact and easy to find.</li>
+              <li>redesigned and laid out a PCIe-to-DAQ thermal test board from two-wire to four-wire kelvin sensing in altium, so measurements read voltage at the device instead of including drops across cables and connectors. i traced ~640 signals and designed the pinout in a way that neighboring signals are adjacent across the connectors, and i interleaved force and sense lines so dense routing stayed clean.</li>
             </ul>
           </div>
         </details>
@@ -132,7 +135,7 @@
             <p class="text-mygray"><span class="prompt">%</span> cat six_lab/README</p>
             <ul>
               <li>contributed to schematic design for a wearable biosignal acquisition pcb built around a precision adc, and ran lab testing to verify signal integrity for cognitive state tracking.</li>
-              <li>validated electrode contact on a hooked in-ear design with 5 electrodes, using real-time bioimpedance to confirm contact with dry electrodes. </li>
+              <li>validated electrode contact on a hooked in-ear design with 5 electrodes, using real-time bioimpedance to confirm contact with dry electrodes.</li>
             </ul>
           </div>
         </details>
@@ -146,7 +149,7 @@
           <div class="readme">
             <p class="text-mygray"><span class="prompt">%</span> cat birds_lab/README</p>
             <ul>
-              <li>designed and assembled a 30V, 10A power board for a quadruped robot. measured inrush current through a small series resistor on an oscilloscope and recorded a 13A peak when the motors connected. with no protection parts on hand, i researched and added an ntc thermistor (rated to 35 a) that limits current at startup and drops to low resistance as it warms.</li>
+              <li>designed and assembled a 30V, 10A power board for a quadruped robot. measured inrush current through a small series resistor on an oscilloscope and recorded a 13A peak when the motors connected. with no protection parts on hand, i researched and added an ntc thermistor (rated to 35A) that limits inrush current at startup and drops to low resistance as it warms. i also added a schottky diode to clamp the inductive flyback voltage.</li>
               <li>integrated an ESP32 photodiode sensing system using adc oversampling and calibration, streaming data over UART for real-time quadcopter orientation estimation.</li>
             </ul>
           </div>
@@ -164,11 +167,12 @@
           </summary>
           <div class="readme">
             <p class="text-mygray"><span class="prompt">%</span> cat heatseeker/README</p>
-            <p class="stack">stack: C, STM32, ADC, XBEE</p>
+            <p class="stack">stack: C, STM32, I2C, ADC, XBEE</p>
             <ul>
               <li>integrated joystick input, infrared sensing, and motor control into one wireless control system, streaming thermal array data over xbee to a smart-glasses hud for real-time navigation.</li>
-              <li>wrote bare-metal c firmware on stm32 for adc joystick processing and root-caused noise + jerky movement in the vehicle by isolating the joystick, logging raw adc values at five positions, corrected a center offset in firmware, and mapped input to five deterministic zones with tiered speed bounds, so the robot moves where it's pointed and ramps smoothly instead of jumping to full speed.</li>
+              <li>wrote bare-metal c firmware on stm32 for adc joystick processing and root-caused noise + jerky movement in the vehicle by isolating the joystick, logging raw adc values at five positions, correcting a center offset in firmware, and mapping input to five deterministic zones with tiered speed bounds, so the robot moves where it's pointed and ramps smoothly instead of jumping to full speed.</li>
               <li>filtered single-frame IR sensor noise with a 4-frame circular buffer of brightest-pixel locations and a majority vote, so the robot follows the pixel that is hottest most often instead of whatever spikes for one frame. the tracked target then moves at most one row and one column per frame, so it can't jump across the image. significantly reduced noise and unpredictable movement in vehicle navigation.</li>
+              <li>monitored battery voltage through a resistor divider into the adc and mapped it to six charge levels between 9 V (empty) and 12.6 V (full). separate up and down thresholds add hysteresis, so the displayed level doesn't flicker when the voltage hovers near a boundary under motor load.</li>
             </ul>
           </div>
         </details>
@@ -207,6 +211,32 @@
           </div>
         </details>
 
+        <!-- COURSEWORK -->
+        <div class="pt-10 pb-5">
+          <p><span class="prompt">sophieyang@umich ~ %</span> cat coursework.txt</p>
+        </div>
+
+        <div class="coursework">
+          <p class="font-bold"><a href="https://www.linkedin.com/in/sophie-yang05/details/education/" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">university of michigan</a></p>
+          <p>bse, electrical engineering</p>
+          <p class="text-mygray">aug 2023 – dec 2027</p>
+          <ul class="course-list">
+            <li><span class="course-code">EECS 200:</span> electrical engineering systems design</li>
+            <li><span class="course-code">EECS 201:</span> computer science pragmatics</li>
+            <li><span class="course-code">EECS 215:</span> introduction to electronic circuits</li>
+            <li><span class="course-code">EECS 216:</span> signals &amp; systems</li>
+            <li><span class="course-code">EECS 230:</span> electromagnetics I</li>
+            <li><span class="course-code">EECS 270:</span> introduction to logic design</li>
+            <li><span class="course-code">EECS 280:</span> programming and introduction to data structures</li>
+            <li><span class="course-code">EECS 301:</span> probabilistic methods in engineering</li>
+            <li><span class="course-code">EECS 312:</span> digital integrated circuits</li>
+            <li><span class="course-code">EECS 351:</span> digital signal processing</li>
+            <li><span class="course-code">EECS 370:</span> computer organization</li>
+            <li><span class="course-code">EECS 373:</span> embedded systems</li>
+            <li><span class="course-code">EECS 470:</span> computer architecture</li>
+          </ul>
+        </div>
+
         <!-- Social icons -->
         <ul class="pt-10 pb-6 flex flex-row items-center gap-4">
           <li>
@@ -230,12 +260,14 @@
   </div>
 
   <script>
-        const expandBtn = document.getElementById('expand-all');
+    const expandBtn = document.getElementById('expand-all');
+    const expandCmd = document.getElementById('expand-cmd');
     const entries = document.querySelectorAll('details.entry');
 
     function syncExpandLabel() {
       const allOpen = [...entries].every(d => d.open);
-      expandBtn.textContent = allOpen ? '[collapse all]' : '[expand all]';
+      expandCmd.textContent = allOpen ? 'clear' : 'cat */README';
+      expandBtn.setAttribute('aria-label', allOpen ? 'collapse all entries' : 'expand all entries');
     }
 
     expandBtn.addEventListener('click', () => {
@@ -245,6 +277,8 @@
     });
 
     entries.forEach(d => d.addEventListener('toggle', syncExpandLabel));
+    syncExpandLabel();
+
     const el = document.getElementById('last-login');
     const now = new Date();
     const days = ['sun','mon','tue','wed','thu','fri','sat'];
