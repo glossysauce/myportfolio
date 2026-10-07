@@ -24,6 +24,20 @@
     ::selection { background: #e879a040; }
     .prompt { color: #e879a0; }
     .text-white { color: #ffffff; }
+    details.entry { margin-bottom: 1.5rem; }
+    details.entry > summary { list-style: none; cursor: pointer; }
+    details.entry > summary::-webkit-details-marker { display: none; }
+    details.entry > summary:focus-visible { outline: 1px dashed #e879a0; outline-offset: 4px; }
+    .toggle::after { content: ' [+]'; color: #a0a0a0; font-weight: 400; }
+    details[open] .toggle::after { content: ' [-]'; color: #e879a0; }
+    details.entry > summary:hover .toggle::after { color: #e879a0; }
+    .readme { margin-top: 0.75rem; padding-left: 1rem; border-left: 1px solid rgba(232,121,160,0.35); font-size: 0.9rem; }
+    .readme ul { margin-top: 0.4rem; }
+    .readme li { position: relative; padding-left: 1.25rem; margin-bottom: 0.6rem; }
+    .readme li::before { content: '-'; position: absolute; left: 0; color: #e879a0; }
+    .readme .stack { color: #a0a0a0; font-size: 0.8rem; margin-top: 0.25rem; }
+    .readme .funfact { color: #ffc8dc; font-size: 0.85rem; margin-top: 0.25rem; }
+    @media (prefers-reduced-motion: reduce) { canvas { display: none; } }
   </style>
 </head>
 <body class="min-h-screen pl-0 pr-0 pt-6 pb-2 mx-10 flex justify-center sm:mx-24">
@@ -50,51 +64,140 @@
           <p><span class="prompt">sophieyang@umich ~ %</span> ls experience</p>
         </div>
 
-        <p class="font-bold"><a href="https://www.tesla.com" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">tesla/</a></p>
-        <p>low voltage hardware validation intern</p>
-        <p class="text-mygray">fall 2026</p>
+        <p class="text-mygray text-sm pb-4">click any entry to expand ^_^</p>
+        <details class="entry">
+          <summary>
+            <p class="font-bold"><a href="https://www.tesla.com" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">tesla/</a><span class="toggle" aria-hidden="true"></span></p>
+            <p>low voltage hardware validation intern</p>
+            <p class="text-mygray">fall 2026</p>
+          </summary>
+          <div class="readme">
+            <p class="text-mygray"><span class="prompt">%</span> cat tesla/README</p>
+            <ul>
+              <li>debugged an issue where an existing test passed on a link that was transmitting frames but receiving none by by isolating a failure to a change in how firmware reported link status after a firmware update broke an ethernet link check on a vehicle controller. rewrote the test to verify link quality instead of transmit counts and documented the findings for the firmware team.</li>
+              <li>built a python framework for 1200 hour high-temperature/high-humidity reliability testing of 6 controllers. each device runs in its own process so one hung connection can't stall the entire test. the script reads the chamber but only controls dut power, so a software bug can't change test conditions. test hours save to disk via JSON file so a crash never loses track of exposure time. logs are append-only and logs are rolled by test hours so data stays intact and easy to find.</li>
+              <li>redesigned and layed out a PCIe-to-DAQ thermal test board from two-wire to four-wire kelvin sensing in altium, so measurements read voltage at the device instead of including drops across cables and connectors. i traced ~640 signals and designed the pinout in a way that neighboring signals are adjacent across the connectors, and i interleaved force and sense lines so dense routing stayed clean.</li>
+            </ul>
+          </div>
+        </details>
 
-        <br/>
+        <details class="entry">
+          <summary>
+            <p class="font-bold"><a href="https://www.honeywell.com/us/en/industries/aerospace" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">honeywell_aerospace/</a><span class="toggle" aria-hidden="true"></span></p>
+            <p>electrical engineering intern</p>
+            <p class="text-mygray">summer 2026</p>
+          </summary>
+          <div class="readme">
+            <p class="text-mygray"><span class="prompt">%</span> cat honeywell_aerospace/README</p>
+            <ul>
+              <li>automated an acceptance test procedure for the Boeing CH-47 weather radar unit in python over TCP/IP: polled antenna azimuth, tilt, and pulse train id, checked each against spec limits, and logged timestamped pass/fail results to csv. validated with software-in-the-loop and on production hardware.</li>
+              <li>wrote a python decoder for ARINC-429 avionics bus logs, using bitmask extraction and two's-complement sign extension to turn raw 32-bit words into engineering units and replace manual spreadsheet lookups.</li>
+              <li>debugged an HDMI display box failure by differentially probing 6 TMDS channels on an oscilloscope, isolating the fault to an inconsistent clock voltage.</li>
+            </ul>
+          </div>
+        </details>
 
-        <p class="font-bold"><a href="https://www.honeywell.com/us/en/industries/aerospace" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">honeywell_aerospace/</a></p>
-        <p>electrical engineering intern</p>
-        <p class="text-mygray">summer 2026</p>
+        <details class="entry">
+          <summary>
+            <p class="font-bold"><a href="https://theisclab.com/index.html" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">isc_lab/</a><span class="toggle" aria-hidden="true"></span></p>
+            <p>embedded sensing firmware researcher</p>
+            <p class="text-mygray">jan 2026 – may 2026 · developed ESP32 firmware for a 48-node wearable magnetic sensing system</p>
+          </summary>
+          <div class="readme">
+            <p class="text-mygray"><span class="prompt">%</span> cat isc_lab/README</p>
+            <ul>
+              <li>developed ESP32 FreeRTOS firmware coordinating magnetometers, IMUs, and i2c load switches across a 4-cell wearable pcb architecture for on-body tracking.</li>
+              <li>moved the system from arduino to ESP32. the arduino version topped out around 15 hz magnetometer polling, too slow for real-time tracking. the ESP32's faster clock and peripherals sped up sampling, and its second core let sensing and communication run in parallel instead of blocking each other.</li>
+              <li>split the workload across the ESP32's two cores: lookup-table-driven sampling of 96 inductors on one, wifi streaming on the other, so network latency never stalls sampling. raised real-time streaming throughput 2.3x.</li>
+              <li>designed a compact byte encoding for the kirigami pcb (4 meshes × 4 panels × 3 coils × 2 inductors), packing cell, mesh, panel, node, and assigned magnetometer into bits so every reading is traceable to its exact inductor. c structs on the firmware side, encode and stream-decode functions on both ends.</li>
+            </ul>
+          </div>
+        </details>
 
-        <br/>
+        <details class="entry">
+          <summary>
+            <p class="font-bold"><a href="https://sixlab-eecs.com" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">six_lab/</a><span class="toggle" aria-hidden="true"></span></p>
+            <p>embedded human computer interaction researcher</p>
+            <p class="text-mygray">jan 2026 – may 2026 · designed wearable hardware for in-ear biosignal acquisition and cognitive state tracking</p>
+          </summary>
+          <div class="readme">
+            <p class="text-mygray"><span class="prompt">%</span> cat six_lab/README</p>
+            <ul>
+              <li>contributed to schematic design for a wearable biosignal acquisition pcb built around a precision adc, and ran lab testing to verify signal integrity for cognitive state tracking.</li>
+              <li>validated electrode contact on a hooked in-ear design with 5 electrodes, using real-time bioimpedance to confirm contact with dry electrodes. </li>
+            </ul>
+          </div>
+        </details>
 
-        <p class="font-bold"><a href="https://theisclab.com/index.html" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">isc_lab/</a></p>
-        <p>embedded sensing firmware researcher</p>
-        <p class="text-mygray">jan 2026 – present · developing esp32 firmware for a 48-node wearable magnetic sensing system</p>
-
-        <br/>
-
-        <p class="font-bold"><a href="https://sixlab-eecs.com" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">six_lab/</a></p>
-        <p>embedded hci researcher</p>
-        <p class="text-mygray">jan 2026 – present · designing wearable hardware for in-ear biosignal acquisition and cognitive state tracking</p>
-
-        <br/>
-
-        <p class="font-bold"><a href="https://www.birds.eecs.umich.edu/" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">birds_lab/</a></p>
-        <p>embedded hardware & power electronics researcher</p>
-        <p class="text-mygray">jan 2025 – dec 2025 · built high-load power board and integrated embedded sensing systems for robotics</p>
+        <details class="entry">
+          <summary>
+            <p class="font-bold"><a href="https://www.birds.eecs.umich.edu/" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">birds_lab/</a><span class="toggle" aria-hidden="true"></span></p>
+            <p>embedded hardware &amp; power electronics researcher</p>
+            <p class="text-mygray">jan 2025 – dec 2025 · built high-load power board and integrated embedded sensing systems for robotics</p>
+          </summary>
+          <div class="readme">
+            <p class="text-mygray"><span class="prompt">%</span> cat birds_lab/README</p>
+            <ul>
+              <li>designed and assembled a 30V, 10A power board for a quadruped robot. measured inrush current through a small series resistor on an oscilloscope and recorded a 13A peak when the motors connected. with no protection parts on hand, i researched and added an ntc thermistor (rated to 35 a) that limits current at startup and drops to low resistance as it warms.</li>
+              <li>integrated an ESP32 photodiode sensing system using adc oversampling and calibration, streaming data over UART for real-time quadcopter orientation estimation.</li>
+            </ul>
+          </div>
+        </details>
 
         <!-- PROJECTS -->
         <div class="pt-10 pb-5">
           <p><span class="prompt">sophieyang@umich ~ %</span> ls projects</p>
         </div>
 
-        <p class="font-bold"><a href="https://rueyday.github.io/HEATSeeker/" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">heatseeker/</a></p>
-        <p class="text-mygray">stm32-based wireless rescue robot with infrared heat tracking and real-time smart glasses hud feedback</p>
+        <details class="entry">
+          <summary>
+            <p class="font-bold"><a href="https://rueyday.github.io/HEATSeeker/" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">heatseeker/</a><span class="toggle" aria-hidden="true"></span></p>
+            <p class="text-mygray">stm32-based wireless rescue robot with infrared heat tracking and real-time smart glasses hud feedback</p>
+          </summary>
+          <div class="readme">
+            <p class="text-mygray"><span class="prompt">%</span> cat heatseeker/README</p>
+            <p class="stack">stack: C, STM32, ADC, XBEE</p>
+            <ul>
+              <li>integrated joystick input, infrared sensing, and motor control into one wireless control system, streaming thermal array data over xbee to a smart-glasses hud for real-time navigation.</li>
+              <li>wrote bare-metal c firmware on stm32 for adc joystick processing and root-caused noise + jerky movement in the vehicle by isolating the joystick, logging raw adc values at five positions, corrected a center offset in firmware, and mapped input to five deterministic zones with tiered speed bounds, so the robot moves where it's pointed and ramps smoothly instead of jumping to full speed.</li>
+              <li>filtered single-frame IR sensor noise with a 4-frame circular buffer of brightest-pixel locations and a majority vote, so the robot follows the pixel that is hottest most often instead of whatever spikes for one frame. the tracked target then moves at most one row and one column per frame, so it can't jump across the image. significantly reduced noise and unpredictable movement in vehicle navigation.</li>
+            </ul>
+          </div>
+        </details>
 
-        <br/>
+        <details class="entry">
+          <summary>
+            <p class="font-bold"><a href="https://github.com/glossysauce/study-pet" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">study_pet/</a><span class="toggle" aria-hidden="true"></span></p>
+            <p class="text-mygray">stm32 + python system that monitors active applications and provides real-time behavioral feedback via spi lcd &amp; pet animations</p>
+          </summary>
+          <div class="readme">
+            <p class="text-mygray"><span class="prompt">%</span> cat study_pet/README</p>
+            <p class="stack">stack: C, STM32, SPI, UART, Python</p>
+            <ul>
+              <li>a tamagotchi-style virtual pet on a 128×128 lcd that reflects how focused you are. health regenerates slowly while you focus (+0.5 per cycle) and drops fast when you're distracted (−5 per cycle). pet mood moves through happy, neutral, sad, and dead states, and an active hardware buzzer sounds for as long as you stay distracted.</li>
+              <li>firmware: implemented UART RX interrupt with a line parser for newline-terminated packets, a session state machine (menu → focused/distracted → end, with idle to pause and resume), focused and distracted time tracked in ms along with distraction episodes, debounced external interrupt driven buttons, and mood-driven pet animation over spi.</li>
+              <li>python host: polls the foreground app, classifies it as focused, distracted, or unknown, and debounces with a grace period so the mcu only receives clean state changes.</li>
+            </ul>
+            <p class="funfact">built it solo from the hardware selection through firmware and the host app, and drew the pet animations myself (it actually made me more aware of my study habits :p)</p>
+          </div>
+        </details>
 
-        <p class="font-bold"><a href="https://github.com/glossysauce/study-pet" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">study_pet/</a></p>
-        <p class="text-mygray">stm32 + python system that monitors active applications and provides real-time behavioral feedback via spi lcd & pet animations</p>
-
-        <br/>
-
-        <p class="font-bold"><a href="https://github.com/glossysauce/Audio-Processing-Embedded-System" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">embedded_audio_processing_system/</a></p>
-        <p class="text-mygray">pwm-based audio playback on stm32 via timer-driven signal generation; python fft/stft preprocessing and digital filtering for accurate note extraction.</p>
+        <details class="entry">
+          <summary>
+            <p class="font-bold"><a href="https://github.com/glossysauce/Audio-Processing-Embedded-System" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">embedded_audio_processing_system/</a><span class="toggle" aria-hidden="true"></span></p>
+            <p class="text-mygray">pwm-based audio playback on stm32 via timer-driven signal generation; python fft/stft preprocessing and digital filtering for accurate note extraction.</p>
+          </summary>
+          <div class="readme">
+            <p class="text-mygray"><span class="prompt">%</span> cat embedded_audio_processing_system/README</p>
+            <p class="stack">stack: C, STM32, PWM, interrupts, Python</p>
+            <ul>
+              <li>plays melodies on a passive buzzer with hardware pwm: each note's frequency is set through the timer's auto-reload register (arr = timer clock / frequency − 1), and the duty cycle sets volume.</li>
+              <li>built an offline python pipeline that turns audio into firmware arrays: harmonic-percussive separation and a 4th-order butterworth bandpass (250–1000 hz) to strip noise from main melody, a 4096-point stft, per-frame peak detection, then merging frames within ±2 hz and dropping notes under 80 ms. the output is copied into firmware as const frequency and duration arrays.</li>
+              <li>the mcu is built for deterministic timing and waveform generation while the offline python host allows large fft windows and heavier noise reduction while playback stays simple and repeatable.</li>
+            </ul>
+            <p class="funfact">fun fact: i actually used bits of this code to play christmas themed soundtracks on the HEATSeeker robot since we presented the project before winter break :D</p>
+          </div>
+        </details>
 
         <!-- Social icons -->
         <ul class="pt-10 pb-6 flex flex-row items-center gap-4">
