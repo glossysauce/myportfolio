@@ -37,6 +37,10 @@
     .readme li::before { content: '-'; position: absolute; left: 0; color: #e879a0; }
     .readme .stack { color: #a0a0a0; font-size: 0.8rem; margin-top: 0.25rem; }
     .readme .funfact { color: #ffc8dc; font-size: 0.85rem; margin-top: 0.25rem; }
+
+    .expand-btn { color: #a0a0a0; background: none; border: none; cursor: pointer; padding: 0; }
+    .expand-btn:hover { color: #e879a0; }
+    .expand-btn:focus-visible { outline: 1px dashed #e879a0; outline-offset: 4px; }
     @media (prefers-reduced-motion: reduce) { canvas { display: none; } }
   </style>
 </head>
@@ -64,7 +68,11 @@
           <p><span class="prompt">sophieyang@umich ~ %</span> ls experience</p>
         </div>
 
-        <p class="text-mygray text-sm pb-4">click any entry to expand ^_^</p>
+        <div class="flex flex-row justify-between items-baseline pb-4">
+          <p class="text-mygray text-sm">click any entry to expand ^_^</p>
+          <button id="expand-all" type="button" class="expand-btn text-sm">[expand all]</button>
+        </div>
+
         <details class="entry">
           <summary>
             <p class="font-bold"><a href="https://www.tesla.com" target="_blank" rel="noopener noreferrer" class="hover:text-mypink">tesla/</a><span class="toggle" aria-hidden="true"></span></p>
@@ -74,7 +82,7 @@
           <div class="readme">
             <p class="text-mygray"><span class="prompt">%</span> cat tesla/README</p>
             <ul>
-              <li>debugged an issue where an existing test passed on a link that was transmitting frames but receiving none by by isolating a failure to a change in how firmware reported link status after a firmware update broke an ethernet link check on a vehicle controller. rewrote the test to verify link quality instead of transmit counts and documented the findings for the firmware team.</li>
+              <li>debugged an issue where an existing test passed on a link that was transmitting frames but receiving none by isolating a failure to a change in how firmware reported link status after a firmware update broke an ethernet link check on a vehicle controller. rewrote the test to verify link quality instead of transmit counts and documented the findings for the firmware team.</li>
               <li>built a python framework for 1200 hour high-temperature/high-humidity reliability testing of 6 controllers. each device runs in its own process so one hung connection can't stall the entire test. the script reads the chamber but only controls dut power, so a software bug can't change test conditions. test hours save to disk via JSON file so a crash never loses track of exposure time. logs are append-only and logs are rolled by test hours so data stays intact and easy to find.</li>
               <li>redesigned and layed out a PCIe-to-DAQ thermal test board from two-wire to four-wire kelvin sensing in altium, so measurements read voltage at the device instead of including drops across cables and connectors. i traced ~640 signals and designed the pinout in a way that neighboring signals are adjacent across the connectors, and i interleaved force and sense lines so dense routing stayed clean.</li>
             </ul>
@@ -222,6 +230,21 @@
   </div>
 
   <script>
+        const expandBtn = document.getElementById('expand-all');
+    const entries = document.querySelectorAll('details.entry');
+
+    function syncExpandLabel() {
+      const allOpen = [...entries].every(d => d.open);
+      expandBtn.textContent = allOpen ? '[collapse all]' : '[expand all]';
+    }
+
+    expandBtn.addEventListener('click', () => {
+      const allOpen = [...entries].every(d => d.open);
+      entries.forEach(d => { d.open = !allOpen; });
+      syncExpandLabel();
+    });
+
+    entries.forEach(d => d.addEventListener('toggle', syncExpandLabel));
     const el = document.getElementById('last-login');
     const now = new Date();
     const days = ['sun','mon','tue','wed','thu','fri','sat'];
